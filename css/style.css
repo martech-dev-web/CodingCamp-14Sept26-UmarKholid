@@ -1,0 +1,801 @@
+/* ============================================
+   CSS Variables for Theming (Design Document 3.1)
+   ============================================ */
+
+:root {
+  /* Color Palette - Primary */
+  --primary-color: #3498db;
+  --primary-dark: #2980b9;
+  --primary-light: #e8f4fc;
+  
+  /* Color Palette - Success/Danger */
+  --success-color: #27ae60;
+  --success-dark: #219653;
+  --danger-color: #e74c3c;
+  --danger-dark: #c0392b;
+  
+  /* Color Palette - Neutral */
+  --text-color: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --border-color: #e0e0e0;
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  
+  /* Border Radius */
+  --border-radius-sm: 3px;
+  --border-radius-md: 5px;
+  --border-radius-lg: 10px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Container */
+  --container-max-width: 1200px;
+  --container-padding: 20px;
+}
+
+/* ============================================
+   CSS Reset and Base Styles (Design Document 3.1)
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: var(--line-height-base);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button, 
+input, 
+select, 
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ============================================
+   Typography System (Design Document 3.1)
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Layout Components (Design Document 3.1)
+   ============================================ */
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   Header Styles (Design Document 3.3)
+   ============================================ */
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* ============================================
+   Balance Display Styles (Design Document 3.3)
+   ============================================ */
+
+.balance-section {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.balance-section h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.balance-display {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  display: inline-block;
+  transition: box-shadow var(--transition-normal);
+}
+
+.balance-display:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.balance-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--success-color);
+}
+
+.balance-negative {
+  color: var(--danger-color);
+}
+
+/* ============================================
+   Form, Chart and Limits Container (Design Document 3.3)
+   ============================================ */
+
+.form-chart-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.chart-limits-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+/* ============================================
+   Form Styles (Design Document 3.1)
+   ============================================ */
+
+.form-section {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal);
+}
+
+.form-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.form-section h2,
+.chart-section h2,
+.transaction-section h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+}
+
+.validation-error {
+  color: var(--danger-color);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+  min-height: 1.25rem;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.validation-error.show {
+  opacity: 1;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-normal), transform var(--transition-fast);
+}
+
+.submit-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+}
+
+.submit-button:disabled {
+  background-color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ============================================
+   Chart Styles (Design Document 3.3)
+   ============================================ */
+
+.chart-section {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal);
+}
+
+.chart-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.chart-container {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+/* ============================================
+   Transaction List Styles (Design Document 3.1)
+   ============================================ */
+
+.transaction-section {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-xl);
+  flex-grow: 1;
+  transition: box-shadow var(--transition-normal);
+}
+
+.transaction-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.transaction-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: var(--spacing-sm);
+}
+
+.no-transactions {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Transaction Item Styles (will be populated by JavaScript) */
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color var(--transition-normal);
+}
+
+.transaction-item:hover {
+  background-color: var(--bg-color);
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-info {
+  flex-grow: 1;
+}
+
+.transaction-name {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.transaction-category {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.transaction-category.food {
+  background-color: #e8f7ed;
+  color: var(--success-color);
+}
+
+.transaction-category.transport {
+  background-color: #fff4e6;
+  color: #e67e22;
+}
+
+.transaction-category.fun {
+  background-color: #f9ebff;
+  color: #9b59b6;
+}
+
+.transaction-amount {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-right: var(--spacing-md);
+}
+
+.transaction-delete {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: var(--spacing-xs);
+  transition: color var(--transition-normal), transform var(--transition-fast);
+  line-height: 1;
+}
+
+.transaction-delete:hover {
+  color: var(--danger-dark);
+  transform: scale(1.1);
+}
+
+.transaction-delete:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   Footer Styles (Design Document 3.3)
+   ============================================ */
+
+.footer {
+  text-align: center;
+  padding: var(--spacing-md);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ============================================
+   Responsive Design (Design Document 3.1)
+   ============================================ */
+
+/* Mobile Layout (Design Document 3.3) */
+@media (max-width: 767px) {
+  :root {
+    --container-padding: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .balance-amount {
+    font-size: 2rem;
+  }
+  
+  .form-section h2,
+  .chart-section h2,
+  .transaction-section h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Tablet Layout (Design Document 3.3) */
+@media (min-width: 768px) {
+  .form-chart-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .container {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* Small Mobile Layout */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 10px;
+  }
+  
+  .container {
+    padding: var(--spacing-md);
+  }
+  
+  .header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .balance-amount {
+    font-size: 1.75rem;
+  }
+  
+  .form-section,
+  .chart-section,
+  .transaction-section {
+    padding: var(--spacing-md);
+  }
+}
+
+/* Desktop Layout (Design Document 3.3) */
+@media (min-width: 1025px) {
+  .container {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+  }
+  
+  .header h1 {
+    font-size: 3rem;
+  }
+  
+  .balance-amount {
+    font-size: 3rem;
+  }
+  
+  .chart-container {
+    height: 350px;
+  }
+}
+
+/* High-Resolution Displays */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+/* ============================================
+   Spending Limits Styles (Design Document 5.4)
+   ============================================ */
+
+.limits-section {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal);
+}
+
+.limits-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.limits-section h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.limits-section h3 {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.limits-config {
+  margin-bottom: var(--spacing-lg);
+}
+
+.limits-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.limits-button {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-normal), transform var(--transition-fast);
+}
+
+.limits-button:hover {
+  transform: translateY(-1px);
+}
+
+.limits-button:active {
+  transform: translateY(1px);
+}
+
+.save-button {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.save-button:hover {
+  background-color: var(--success-dark);
+}
+
+.reset-button {
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.reset-button:hover {
+  background-color: #d5d5d5;
+}
+
+/* Limit Status Styles */
+.limits-status {
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--spacing-lg);
+}
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-color);
+  border-left: 4px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.status-item.warning {
+  border-left-color: #f39c12;
+  background-color: #fff8e6;
+}
+
+.status-item.exceeded {
+  border-left-color: var(--danger-color);
+  background-color: #ffeaea;
+}
+
+.status-item.within-limit {
+  border-left-color: var(--success-color);
+  background-color: #e8f7ed;
+}
+
+.status-category {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.status-details {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.status-amount {
+  font-weight: bold;
+}
+
+.status-percentage {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+  background-color: white;
+}
+
+.status-item.warning .status-percentage {
+  background-color: #fff8e6;
+  color: #d35400;
+}
+
+.status-item.exceeded .status-percentage {
+  background-color: #ffeaea;
+  color: var(--danger-dark);
+}
+
+.status-item.within-limit .status-percentage {
+  background-color: #e8f7ed;
+  color: var(--success-dark);
+}
+
+.no-limits {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Transaction limit warnings */
+.transaction-item.limit-warning {
+  border-left: 4px solid #f39c12;
+  background-color: #fff8e6;
+}
+
+.transaction-item.limit-exceeded {
+  border-left: 4px solid var(--danger-color);
+  background-color: #ffeaea;
+}
+
+/* Chart limit indicators */
+.limit-warning-marker {
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Form warning for exceeded limits */
+.limit-exceeded-warning {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: #ffeaea;
+  border: 1px solid var(--danger-color);
+  border-radius: var(--border-radius-md);
+  color: var(--danger-dark);
+  font-weight: 500;
+  display: none;
+}
+
+.limit-exceeded-warning.show {
+  display: block;
+}
+
+/* Tablet Layout */
+@media (min-width: 768px) {
+  .chart-limits-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .limits-section {
+    height: 100%;
+  }
+}
+
+/* Desktop Layout */
+@media (min-width: 1025px) {
+  .chart-limits-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}

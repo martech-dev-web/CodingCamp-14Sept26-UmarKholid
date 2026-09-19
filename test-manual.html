@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual Test - Expenses App</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .pass { color: green; }
+        .fail { color: red; }
+        .test-button { margin: 10px; padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        .test-button:hover { background: #45a049; }
+        .results { margin-top: 10px; padding: 10px; background: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>Manual Test for Expenses Budget Visualizer</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Basic HTML Structure</h2>
+        <button class="test-button" onclick="testHTMLStructure()">Run Test</button>
+        <div id="test1-results" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: CSS Loading</h2>
+        <button class="test-button" onclick="testCSSLoading()">Run Test</button>
+        <div id="test2-results" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: JavaScript Loading</h2>
+        <button class="test-button" onclick="testJSLoading()">Run Test</button>
+        <div id="test3-results" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 4: Local Storage</h2>
+        <button class="test-button" onclick="testLocalStorage()">Run Test</button>
+        <div id="test4-results" class="results"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 5: Open Main Application</h2>
+        <button class="test-button" onclick="window.open('index.html', '_blank')">Open App</button>
+        <p>Open the main application in a new tab to manually test form submission, transaction display, and chart rendering.</p>
+    </div>
+    
+    <script>
+        function testHTMLStructure() {
+            const results = document.getElementById('test1-results');
+            let html = '<h3>HTML Structure Test Results:</h3><ul>';
+            let passCount = 0;
+            let totalCount = 0;
+            
+            // Test 1: Check if index.html exists
+            fetch('index.html')
+                .then(response => {
+                    totalCount++;
+                    if (response.ok) {
+                        html += '<li class="pass">✅ index.html exists and is accessible</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ index.html not found or inaccessible</li>';
+                    }
+                    
+                    // Test 2: Check HTML structure
+                    return fetch('index.html');
+                })
+                .then(response => response.text())
+                .then(text => {
+                    totalCount++;
+                    if (text.includes('<!DOCTYPE html>')) {
+                        html += '<li class="pass">✅ HTML5 doctype present</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ HTML5 doctype missing</li>';
+                    }
+                    
+                    totalCount++;
+                    if (text.includes('Expenses & Budget Visualizer')) {
+                        html += '<li class="pass">✅ Title present</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ Title missing</li>';
+                    }
+                    
+                    totalCount++;
+                    if (text.includes('transaction-form')) {
+                        html += '<li class="pass">✅ Transaction form present</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ Transaction form missing</li>';
+                    }
+                    
+                    html += '</ul>';
+                    html += `<p><strong>Score: ${passCount}/${totalCount} passed</strong></p>`;
+                    results.innerHTML = html;
+                })
+                .catch(error => {
+                    results.innerHTML = `<p class="fail">Error running HTML tests: ${error.message}</p>`;
+                });
+        }
+        
+        function testCSSLoading() {
+            const results = document.getElementById('test2-results');
+            let html = '<h3>CSS Loading Test Results:</h3><ul>';
+            let passCount = 0;
+            let totalCount = 0;
+            
+            // Test CSS file
+            fetch('css/style.css')
+                .then(response => {
+                    totalCount++;
+                    if (response.ok) {
+                        html += '<li class="pass">✅ CSS file exists and is accessible</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ CSS file not found or inaccessible</li>';
+                        results.innerHTML = html;
+                        return;
+                    }
+                    
+                    return response.text();
+                })
+                .then(cssText => {
+                    if (cssText) {
+                        totalCount++;
+                        if (cssText.includes(':root')) {
+                            html += '<li class="pass">✅ CSS variables defined (:root)</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ CSS variables missing</li>';
+                        }
+                        
+                        totalCount++;
+                        if (cssText.includes('@media')) {
+                            html += '<li class="pass">✅ Responsive media queries present</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ Responsive media queries missing</li>';
+                        }
+                        
+                        totalCount++;
+                        if (cssText.includes('.transaction-item')) {
+                            html += '<li class="pass">✅ Transaction styles present</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ Transaction styles missing</li>';
+                        }
+                    }
+                    
+                    html += '</ul>';
+                    html += `<p><strong>Score: ${passCount}/${totalCount} passed</strong></p>`;
+                    results.innerHTML = html;
+                })
+                .catch(error => {
+                    results.innerHTML = `<p class="fail">Error running CSS tests: ${error.message}</p>`;
+                });
+        }
+        
+        function testJSLoading() {
+            const results = document.getElementById('test3-results');
+            let html = '<h3>JavaScript Loading Test Results:</h3><ul>';
+            let passCount = 0;
+            let totalCount = 0;
+            
+            // Test JS file
+            fetch('js/app.js')
+                .then(response => {
+                    totalCount++;
+                    if (response.ok) {
+                        html += '<li class="pass">✅ JavaScript file exists and is accessible</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ JavaScript file not found or inaccessible</li>';
+                        results.innerHTML = html;
+                        return;
+                    }
+                    
+                    return response.text();
+                })
+                .then(jsText => {
+                    if (jsText) {
+                        totalCount++;
+                        if (jsText.includes('use strict')) {
+                            html += '<li class="pass">✅ Strict mode enabled</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ Strict mode missing</li>';
+                        }
+                        
+                        totalCount++;
+                        if (jsText.includes('localStorage')) {
+                            html += '<li class="pass">✅ Local Storage usage present</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ Local Storage usage missing</li>';
+                        }
+                        
+                        totalCount++;
+                        if (jsText.includes('Chart')) {
+                            html += '<li class="pass">✅ Chart.js integration present</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ Chart.js integration missing</li>';
+                        }
+                        
+                        totalCount++;
+                        if (jsText.includes('validate')) {
+                            html += '<li class="pass">✅ Validation logic present</li>';
+                            passCount++;
+                        } else {
+                            html += '<li class="fail">❌ Validation logic missing</li>';
+                        }
+                    }
+                    
+                    html += '</ul>';
+                    html += `<p><strong>Score: ${passCount}/${totalCount} passed</strong></p>`;
+                    results.innerHTML = html;
+                })
+                .catch(error => {
+                    results.innerHTML = `<p class="fail">Error running JavaScript tests: ${error.message}</p>`;
+                });
+        }
+        
+        function testLocalStorage() {
+            const results = document.getElementById('test4-results');
+            let html = '<h3>Local Storage Test Results:</h3><ul>';
+            let passCount = 0;
+            let totalCount = 0;
+            
+            // Test 1: Check if localStorage is available
+            totalCount++;
+            if (typeof localStorage !== 'undefined') {
+                html += '<li class="pass">✅ localStorage API available</li>';
+                passCount++;
+                
+                // Test 2: Try to set and get a test value
+                totalCount++;
+                try {
+                    const testKey = 'expenses_test_' + Date.now();
+                    const testValue = 'test_value_' + Date.now();
+                    localStorage.setItem(testKey, testValue);
+                    const retrievedValue = localStorage.getItem(testKey);
+                    
+                    if (retrievedValue === testValue) {
+                        html += '<li class="pass">✅ localStorage read/write works</li>';
+                        passCount++;
+                    } else {
+                        html += '<li class="fail">❌ localStorage read/write failed</li>';
+                    }
+                    
+                    // Clean up
+                    localStorage.removeItem(testKey);
+                } catch (error) {
+                    html += `<li class="fail">❌ localStorage error: ${error.message}</li>`;
+                }
+                
+                // Test 3: Check if app storage key exists or can be created
+                totalCount++;
+                try {
+                    const appKey = 'expenses_budget_visualizer';
+                    const currentData = localStorage.getItem(appKey);
+                    
+                    if (currentData !== null) {
+                        html += '<li class="pass">✅ App data found in localStorage</li>';
+                        passCount++;
+                        
+                        // Try to parse it
+                        try {
+                            JSON.parse(currentData);
+                            html += '<li class="pass">✅ App data is valid JSON</li>';
+                            passCount++;
+                            totalCount++; // Count this test too
+                        } catch (e) {
+                            html += '<li class="fail">❌ App data is not valid JSON</li>';
+                            totalCount++; // Count this test too
+                        }
+                    } else {
+                        html += '<li class="pass">✅ No existing app data (clean state)</li>';
+                        passCount++;
+                    }
+                } catch (error) {
+                    html += `<li class="fail">❌ Error checking app data: ${error.message}</li>`;
+                }
+            } else {
+                html += '<li class="fail">❌ localStorage not available in this environment</li>';
+            }
+            
+            html += '</ul>';
+            html += `<p><strong>Score: ${passCount}/${totalCount} passed</strong></p>`;
+            results.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
